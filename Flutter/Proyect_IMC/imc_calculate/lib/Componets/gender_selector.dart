@@ -19,7 +19,7 @@ class _GenderSelectorState extends State<GenderSelector> {
         // Man
         Expanded(
           child: GestureDetector(
-            // Esto sirve para escuchar los ta, todos los tipos de clicleos
+            // Esto sirve para escuchar los tap todos los tipos de clicleos
             onTap: () {
               setState(() {
                 // metodo para modificar
