@@ -3,22 +3,25 @@ import 'package:imc_calculate/Core/app_colors.dart';
 import 'package:imc_calculate/Core/text_styles.dart';
 
 class HeightSelector extends StatefulWidget {
-  const HeightSelector({super.key});
+  final double height;
+  final Function(double) onHeightChange;
+
+  const HeightSelector({super.key, required this.height, required this.onHeightChange});
 
   @override
   State<HeightSelector> createState() => _HeightSelectorState();
 }
 
 class _HeightSelectorState extends State<HeightSelector> {
-  double height = 220; // Altura inicial
+   // Altura inicial
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: Container(
         decoration: BoxDecoration(
-          color:AppColors.backgroundComponet,
-          borderRadius: BorderRadius.circular(16)
+          color: AppColors.backgroundComponet,
+          borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
           children: [
@@ -27,7 +30,7 @@ class _HeightSelectorState extends State<HeightSelector> {
               child: Text("Altura", style: TextStyles.bodyText),
             ),
             Text(
-              "${height.toStringAsFixed(0)} cm",
+              "${widget.height.toStringAsFixed(0)} cm",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 38,
@@ -35,17 +38,18 @@ class _HeightSelectorState extends State<HeightSelector> {
               ),
             ),
             Slider(
-              value: height,
+              value: widget.height,
               onChanged: (newheight) {
                 setState(() {
-                  height = newheight;
+                   widget.onHeightChange(newheight);
                 });
               },
               min: 150,
               max: 220,
               divisions: 70,
               activeColor: AppColors.primary,
-              label: "${height.toStringAsFixed(0)}",
+              label: "${widget.height.toStringAsFixed(0)} cm",
+              secondaryActiveColor: AppColors.primary,
             ),
           ],
         ),
